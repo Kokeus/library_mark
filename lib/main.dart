@@ -23,30 +23,10 @@ class _MyAppState extends State<MyApp> {
           key: _key,
           child: Column(
             children: [
-             TextFormField(
-               decoration: InputDecoration(
-                 labelText: 'First Name',
-               ),
-               validator: validateText,
-             ),
-              TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Last Name',
-                ),
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Email',
-                ),
-                validator: validateEmail,
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                    labelText: 'Pass',
-                ),
-                validator: validatePassword,
-                obscureText: true,
-              ),
+             textField('First Name'),
+              textField('Last Name'),
+              textField('E-mail', validation: validateEmail),
+              textField('Password', obscure: true, validation: validatePassword),
             ],
           ),
         ),
@@ -61,6 +41,21 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+
+  Widget textField(
+      String label,
+  {bool obscure = false, Function validation = validateText}
+      ) {
+
+    return TextFormField(
+      decoration: InputDecoration(
+        obscureText: obscure,
+        validator: validation,
+      ),
+    );
+
+  }
+
 }
 
 //String нул сейфти ошибка
